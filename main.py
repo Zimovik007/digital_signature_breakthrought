@@ -1,6 +1,7 @@
 from typing import Optional
 
 from fastapi import FastAPI
+from models import DocForGetSignature, DocForCheckSignature
 
 app = FastAPI()
 
@@ -10,6 +11,11 @@ def read_root():
     return {"Hello": "World"}
 
 
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: Optional[str] = None):
-    return {"item_id": item_id, "q": q}
+@app.post("/create_electronic_signature")
+def create_electronic_signature(doc: DocForGetSignature):
+    return {"public_key": "1234567890", "status": "True"}
+
+
+@app.post("/check_electronic_signature")
+def check_electronic_signature(doc: DocForCheckSignature):
+    return {"status": "True"}

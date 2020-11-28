@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Цифровой прорыв - Почта России</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="css/scrolling-nav.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand js-scroll-trigger" href="#page-top">Цифровой прорыв</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+  </nav>
+
+  <header class="bg-primary text-white">
+    <div class="container text-center">
+      <h1>Электронная подпись документов</h1>
+      <p class="lead">Загрузите вашу электронную подпись или оставьте поле пустым (будет сгенерирован случайный ключ)</p>
+      <input type="file" name="signature">
+    </div>
+    <br><br>
+    <div class="container text-center" id='files_input_div'>
+      <p class="lead">Загрузите документы в формате .word</p>
+      <button id="add_input">+</button>       <button id="rem_input">-</button>
+      <br><br>
+      <input type="file" name="signature" id="input1" />
+    </div>
+    <br><br>
+    <div class="container text-center">
+      <button class="btn btn-dark btn-lg">Отправить</button>
+    </div>
+    
+  </header>
+
+
+
+  <script type="text/javascript">
+    
+    let btn_add = document.getElementById('add_input');
+    let btn_rem = document.getElementById('rem_input');
+
+    let container = document.getElementById('files_input_div');
+
+    let _id = 1;
+
+    btn_add.onclick = function() {
+      let input = document.createElement('input');
+      input.type = 'file';
+      _id += 1;
+      input.id = 'input' + _id;
+
+      let div = document.createElement('div');
+      div.id = 'div' + _id;
+
+      div.appendChild(document.createElement('br'));
+      div.appendChild(document.createElement('br'));
+      div.appendChild(input);
+      container.appendChild(div);
+    };
+
+    btn_rem.onclick = function() {
+      document.getElementById('div' + _id).remove();
+      _id -= 1;
+    };
+
+    // fetch('http://localhost:8001/sample.pdf', {
+    //   'method': 'GET',
+      // 'headers': {
+      //   'Allow': 'GET, OPTIONS',
+      //   'Access-Control-Allow-Origin': '*',
+      //   'Access-Control-Allow-Headers': 'X-Request, X-Requested-With'
+      // }
+    // })
+    // .then(res => saveAs(res.blob()))
+
+    function download(url, filename) {
+      fetch(url, { 
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Access-Control-Allow-Headers': 'Content-Type',
+          'Access-Control-Allow-Methods': 'GET, OPTIONS',
+        },
+      }).then(function(t) {
+        return t.blob().then((b) => {
+          var a = document.createElement("a");
+          a.href = URL.createObjectURL(b);
+          a.setAttribute("download", filename);
+          a.click();
+        });
+      });
+    };
+
+    download('http://localhost:8001/sample.pdf', 'sample.pdf');
+    download('http://localhost:8001/sample.pdf.sig', 'sample.pdf.sig');
+
+    // let browser = chrome || browser;
+
+    // browser.downloads.download({
+    //   filename: 'sample.pdf',
+    //   url: 'http://www.africau.edu/images/default/sample.pdf'
+    // });
+
+    // saveAs()
+
+  </script>
+
+
+</body>
+
+</html>

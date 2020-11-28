@@ -21,8 +21,8 @@ def create_electronic_signature(doc: DocForGetSignature):
     pubkey = key.publickey()
 
     return {
-        "public_key": pubkey,
-        "signature": signature,
+        "public_key": pubkey.__str__(),
+        "signature": signature.decode('utf-16'),
         "status": True
     }
 

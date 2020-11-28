@@ -1,21 +1,23 @@
-from typing import Optional
-
 from fastapi import FastAPI
-from models import DocForGetSignature, DocForCheckSignature
+from src.models import DocForGetSignature, DocForCheckSignature
+from src.signature import signature as sig
 
 app = FastAPI()
 
 
 @app.get("/")
-def read_root():
-    return {"Hello": "World"}
+def root():
+    return {
+        "event": "digital breakthrough",
+        "team": "OkayBoomers"
+    }
 
 
 @app.post("/create_electronic_signature")
 def create_electronic_signature(doc: DocForGetSignature):
-    return {"public_key": "1234567890", "status": "True"}
+    return sig.create_electronic_signature(doc)
 
 
 @app.post("/check_electronic_signature")
 def check_electronic_signature(doc: DocForCheckSignature):
-    return {"status": "True"}
+    return sig.check_electronic_signature(doc)

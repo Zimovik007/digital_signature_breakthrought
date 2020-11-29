@@ -81,16 +81,6 @@
       _id -= 1;
     };
 
-    // fetch('http://localhost:8001/sample.pdf', {
-    //   'method': 'GET',
-      // 'headers': {
-      //   'Allow': 'GET, OPTIONS',
-      //   'Access-Control-Allow-Origin': '*',
-      //   'Access-Control-Allow-Headers': 'X-Request, X-Requested-With'
-      // }
-    // })
-    // .then(res => saveAs(res.blob()))
-
     function download(url, filename) {
       fetch(url, { 
         headers: {
@@ -111,15 +101,6 @@
 
     download('http://localhost:8001/sample.pdf', 'sample.pdf');
     download('http://localhost:8001/sample.pdf.sig', 'sample.pdf.sig');
-
-    // let browser = chrome || browser;
-
-    // browser.downloads.download({
-    //   filename: 'sample.pdf',
-    //   url: 'http://www.africau.edu/images/default/sample.pdf'
-    // });
-
-    // saveAs()
 
   </script>
 

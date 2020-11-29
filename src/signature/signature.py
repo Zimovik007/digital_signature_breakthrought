@@ -7,6 +7,7 @@ from src.models import DocForGetSignature, DocForCheckSignature
 
 
 def get_bytearray(text):
+    text = ""
     b = bytearray()
     b.extend(map(ord, text))
     return b
@@ -21,8 +22,8 @@ def create_electronic_signature(doc: DocForGetSignature):
     pubkey = key.publickey()
 
     return {
-        "public_key": pubkey.__str__(),
-        "signature": signature.decode('utf-16'),
+        "public_key": str(pubkey),
+        "signature": str(signature),
         "status": True
     }
 
